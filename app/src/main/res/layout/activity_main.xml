@@ -16,6 +16,12 @@
         android:layout_height="60dp"
         tools:text="Hello World!" />
 
+    <EditText
+        android:id="@+id/ac_main_et"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@null"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ac_main_rv"
         android:layout_width="match_parent"

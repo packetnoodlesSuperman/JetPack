@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ac_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                observer.userModel.getName().setValue("UserModel" + System.currentTimeMillis());
+                observer.userModel.getName().setValue("UserModel" + System.currentTimeMillis()/10000);
             }
         });
 
