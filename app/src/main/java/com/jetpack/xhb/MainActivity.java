@@ -7,7 +7,6 @@ import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 import android.arch.paging.PositionalDataSource;
 import android.arch.persistence.room.Room;
-import android.database.Observable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +17,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.jetpack.xhb.jetpack.AppDataBase;
+import com.jetpack.xhb.jetpack.DataBean;
+import com.jetpack.xhb.jetpack.MainPresenter;
+import com.jetpack.xhb.jetpack.UserAdapter;
+import com.jetpack.xhb.jetpack.UserRoom;
+import com.jetpack.xhb.jetpack.UserRoomDao;
 
 import java.util.ArrayList;
 import java.util.List;

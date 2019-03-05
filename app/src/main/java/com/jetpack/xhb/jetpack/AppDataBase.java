@@ -1,4 +1,4 @@
-package com.jetpack.xhb;
+package com.jetpack.xhb.jetpack;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

@@ -41,15 +41,17 @@ public class MainActivityTest {
     }
 
     @Test
-    public void ensureTextChangesWork() {
+    public void ensureTextChangesWork() throws InterruptedException {
         //输入文字, 并点击按钮
         onView(withId(R.id.ac_main_et))
                 .perform(typeText("111"), closeSoftKeyboard());
         onView(withId(R.id.ac_main_et)).perform(click());
+        Thread.sleep(1000);
         //检查输入框文字是否改变
         onView(withId(R.id.ac_main_et))
                 .perform(typeText("222"), closeSoftKeyboard());
         onView(withId(R.id.ac_main_et)).check(matches(withText("111222")));
+        
     }
 
 
