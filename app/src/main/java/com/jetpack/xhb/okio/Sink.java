@@ -6,6 +6,9 @@ import java.io.IOException;
 
 /**
  * 写 输出 发送数据
+ *
+ * 了解Closeable
+ * 了解Flushable
  */
 public interface Sink extends Closeable, Flushable {
 

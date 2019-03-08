@@ -2,11 +2,11 @@ package com.jetpack.xhb.okio;
 
 /**
  * 字节序列 8kb
- * 链式结构
+ * 链式结构  双向链表
  */
 public class Segment {
 
-    //容量
+    //容量 最大字节数
     static final int SIZE = 8192;
 
     //最小共享容量
@@ -15,12 +15,16 @@ public class Segment {
     //构造参数一定创建
     final byte[] data;
 
+    //第一个可读的位置
     int pos;
 
+    //第一个可写的位置，一个Segment的可读数据量为limit - pos
     int limit;
 
+    //当前存储的data数据是其它对象共享的则为真  共享机制
     boolean shared;
 
+    //自己持有标记
     boolean owner;
 
     //后继

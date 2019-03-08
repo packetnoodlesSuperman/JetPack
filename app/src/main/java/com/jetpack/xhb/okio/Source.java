@@ -4,7 +4,7 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * 读
+ * 读 输入流
  */
 public interface Source extends Closeable {
 

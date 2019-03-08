@@ -1,13 +1,28 @@
 package com.jetpack.xhb.okio;
 
-import okio.BufferedSource;
+import java.io.IOException;
+
 
 public class Buffer implements BufferedSink, BufferedSource, Cloneable{
+
+    Segment head;
+
+    long size;
+
+    @Override
+    public Buffer buffer() {
+        return null;
+    }
 
     @Override public Buffer write(ByteString byteString) {
         if (byteString == null) throw new IllegalArgumentException("byteString == null");
         byteString.write(this);
         return this;
+    }
+
+    @Override
+    public BufferedSink wirte(byte[] source) throws IOException {
+        return null;
     }
 
     /**
@@ -32,6 +47,26 @@ public class Buffer implements BufferedSink, BufferedSource, Cloneable{
         return this;
     }
 
+    @Override
+    public long writeAll(Source source) throws IOException {
+        return 0;
+    }
+
+     public Buffer writeUtf8(String string) {
+        return writeUtf8(string, 0, string.length());
+    }
+
+    //写进缓存
+    public Buffer writeUtf8(String string, int beginIndex, int endIndex) {
+
+        return this;
+    }
+
+    @Override
+    public BufferedSink emitCompleteSegments() throws IOException {
+        return null;
+    }
+
     Segment writableSegment(int minimumCapacity) {
 
         return null;
@@ -47,4 +82,36 @@ public class Buffer implements BufferedSink, BufferedSource, Cloneable{
         }
     }
 
+    @Override
+    public void write(Buffer source, long byteCount) throws IOException {
+
+    }
+
+    public long completeSegmentByteCount() {
+        long result = size;
+        if (result == 0) return 0;
+
+        Segment tail = head.prev;
+        if (tail.limit < Segment.SIZE && tail.owner) {
+            result -= tail.limit - tail.pos;
+        }
+
+        return result;
+    }
+
+    @Override
+    public void flush() throws IOException {
+
+    }
+
+
+    @Override
+    public Timeout timeout() {
+        return null;
+    }
+
+    @Override
+    public void close() throws IOException {
+
+    }
 }

@@ -14,6 +14,6 @@ public interface BufferedSink extends Sink{
 
     long writeAll(Source source) throws IOException;
 
-
+    BufferedSink emitCompleteSegments() throws IOException;
 
 }
