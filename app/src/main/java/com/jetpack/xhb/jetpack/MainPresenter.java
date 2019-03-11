@@ -7,7 +7,7 @@ import android.util.Log;
 // implementation "android.arch.lifecycle:runtime:1.1.1"
 public class MainPresenter implements LifecycleObserver{
 
-    UserModel userModel;
+    public UserModel userModel;
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void create(){

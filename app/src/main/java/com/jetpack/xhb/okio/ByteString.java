@@ -29,7 +29,10 @@ public class ByteString implements Serializable, Comparable<ByteString>{
         this.data = data;
     }
 
-    //copy一样 将字节码序列封装成ByteString
+    /**
+     * of() 等同于of(new byte[]{});
+     * copy一样 将字节码序列封装成ByteString
+     */
     public static ByteString of(byte... data) {
         if (data == null) {
             throw new IllegalArgumentException("data == null");
