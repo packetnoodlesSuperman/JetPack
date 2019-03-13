@@ -37,6 +37,12 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
 
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    public native String stringFromJNI();
+
     private MainPresenter observer;
     private UserRoomDao userRoomDao;
 
@@ -64,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        observer.userModel.getName().observe(MainActivity.this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                ((TextView) findViewById(R.id.ac_main_tv)).setText(s);
-            }
-        });
+//        observer.userModel.getName().observe(MainActivity.this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+                ((TextView) findViewById(R.id.ac_main_tv)).setText(stringFromJNI());
+//            }
+//        });
 
         findViewById(R.id.ac_main_tv).setOnClickListener(new View.OnClickListener() {
             @Override
