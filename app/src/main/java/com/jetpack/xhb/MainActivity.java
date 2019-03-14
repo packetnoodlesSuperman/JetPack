@@ -24,9 +24,12 @@ import com.jetpack.xhb.jetpack.MainPresenter;
 import com.jetpack.xhb.jetpack.UserAdapter;
 import com.jetpack.xhb.jetpack.UserRoom;
 import com.jetpack.xhb.jetpack.UserRoomDao;
+import com.meituan.android.walle.ChannelInfo;
+import com.meituan.android.walle.WalleChannelReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Lifecycle
@@ -44,27 +47,39 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 
     private MainPresenter observer;
-    private UserRoomDao userRoomDao;
+//    private UserRoomDao userRoomDao;
+
+    String channel= "什么也没有";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //walle 的api 在360加固后拿不到渠道了，但是可以通过meta标签获取到UMENG_CHANNEL中的渠道号拿到
+        ChannelInfo channelInfo= WalleChannelReader.getChannelInfo(this.getApplicationContext());
+        if (channelInfo != null) {
+            channel = channelInfo.getChannel();
+            Map<String, String> extraInfo = channelInfo.getExtraInfo();
+        }
+        // 或者也可以直接根据key获取
+        String value = WalleChannelReader.get(this, "buildtime");
+
+
         observer = new MainPresenter();
         getLifecycle().addObserver(observer);
 
-        AppDataBase db = Room.databaseBuilder(getApplicationContext(),
-                AppDataBase.class, "jecpack_db").allowMainThreadQueries().build();
+//        AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+//                AppDataBase.class, "jecpack_db").allowMainThreadQueries().build();
 
-        userRoomDao = db.userRoomDao();
+//        userRoomDao = db.userRoomDao();
 
-        userRoomDao.insert(new UserRoom(System.currentTimeMillis(), "User002", 16));
-        List<UserRoom> userRooms = userRoomDao.getUserRooms();
-        Log.e("UserRoom", userRooms.size() + "");
-        if (userRooms.size() > 0) {
-            Log.e("UserRoom", userRooms.get(0).name + userRooms.get(0).age);
-        }
+//        userRoomDao.insert(new UserRoom(System.currentTimeMillis(), "User002", 16));
+//        List<UserRoom> userRooms = userRoomDao.getUserRooms();
+//        Log.e("UserRoom", userRooms.size() + "");
+//        if (userRooms.size() > 0) {
+//            Log.e("UserRoom", userRooms.get(0).name + userRooms.get(0).age);
+//        }
     }
 
     @Override
@@ -73,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
 //        observer.userModel.getName().observe(MainActivity.this, new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
-                ((TextView) findViewById(R.id.ac_main_tv)).setText(stringFromJNI());
+//                ((TextView) findViewById(R.id.ac_main_tv)).setText(stringFromJNI());
+                ((TextView) findViewById(R.id.ac_main_tv)).setText(channel);
 //            }
 //        });
 

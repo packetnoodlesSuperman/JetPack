@@ -1,0 +1,12 @@
+duobei #多贝
+anzhi #安智
+baidu #百度
+huawei #华为
+oppo #oppo
+wdj #豌豆荚
+xiaomi #小米
+yyb #应用宝
+
+# gradlew assemblePreviewDebugChannels -PchannelList=duobei 打单个包 Preview环境 debug类型 多贝渠道
+# gradlew assemblePreviewDebugChannels -PchannelList=duobei,baidu 打单个包 Preview环境 debug类型 多贝渠道以及百度渠道
+# 打包文件内的渠道包：gradlew assembleProductRelease -PchannelFile=channel
