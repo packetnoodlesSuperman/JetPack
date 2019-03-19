@@ -4,6 +4,9 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * 字节序列的封装
+ */
 public class ByteString implements Serializable, Comparable<ByteString> {
 
     static final char[] HEX_DIGIST = {
@@ -12,47 +15,17 @@ public class ByteString implements Serializable, Comparable<ByteString> {
 
     private static final long serialVersionUID = 1L;
 
-    public static final ByteString EMPTY = ByteString.of();
-
-    //对字节码的封装
     final byte[] data;
 
-    transient String utf8;
+    public static final ByteString EMPTY = ByteString.of();
 
-    public ByteString(byte[] data) {
-        this.data = data;
-    }
-
-    /**
-     * of() 等同于of(new byte[]{});
-     */
-    public static ByteString of(byte... data) {
-        if (data == null) {
-            throw new IllegalArgumentException("data == null");
-        }
+    private static ByteString of(byte... data) {
+        if (data == null) throw new IllegalArgumentException("data == null");
         return new ByteString(data.clone());
     }
 
-    public static ByteString of(byte[] data, int offset, int byteCount) {
-        if (data == null) {
-            throw new IllegalArgumentException("data == null");
-        }
-
-        Util.checkOffsetAndCount(data.length, offset, byteCount);
-
-        byte[] copy = new byte[byteCount];
-        System.arraycopy(data, offset, copy, 0, byteCount);
-        return new ByteString(copy);
-    }
-
-    public static ByteString encodeUtf8(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException("s == null");
-        }
-
-        ByteString byteString = new ByteString(s.getBytes(Util.UTF_8));
-        byteString.utf8 = s;
-        return byteString;
+    public ByteString(byte[] data) {
+        this.data = data;
     }
 
     @Override

@@ -1,8 +1,27 @@
 package com.jetpack.xhb.okio.kotlin
 
+import java.io.OutputStream
+
 class Buffer: BufferedSource, BufferedSink, Cloneable {
 
     var head: Segment? = null
+
+    var size: Long = 0L
+
+    fun outputStream(): OutputStream {
+        return object : OutputStream() {
+            override fun write(b: Int) {
+                writeByte(b)
+            }
+        }
+    }
+
+    private fun writeByte(b: Int): Buffer {
+        var tail = writableSegment(1)
+        tail.data[tail.limit++] = b.toByte()
+        size += 1L
+        return this
+    }
 
     fun write(byteString: ByteString): Buffer{
         byteString.write(this)

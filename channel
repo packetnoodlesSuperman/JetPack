@@ -10,3 +10,8 @@ yyb #应用宝
 # gradlew assemblePreviewDebugChannels -PchannelList=duobei 打单个包 Preview环境 debug类型 多贝渠道
 # gradlew assemblePreviewDebugChannels -PchannelList=duobei,baidu 打单个包 Preview环境 debug类型 多贝渠道以及百度渠道
 # 打包文件内的渠道包：gradlew assembleProductRelease -PchannelFile=channel
+
+#写入渠道
+#java -jar walle-cli-all.jar put -c meituan /Users/Meituan/Downloads/app.apk
+#命令行指定渠道列表
+#java -jar walle-cli-all.jar batch -c meituan,meituan2,meituan3 /Users/walle/app/build/outputs/apk/app.apk

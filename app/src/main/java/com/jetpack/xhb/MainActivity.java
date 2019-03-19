@@ -7,6 +7,8 @@ import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 import android.arch.paging.PositionalDataSource;
 import android.arch.persistence.room.Room;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -89,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onChanged(@Nullable String s) {
 //                ((TextView) findViewById(R.id.ac_main_tv)).setText(stringFromJNI());
-                ((TextView) findViewById(R.id.ac_main_tv)).setText(channel);
+
+        ((TextView) findViewById(R.id.ac_main_tv)).setText(channel);
 //            }
 //        });
 

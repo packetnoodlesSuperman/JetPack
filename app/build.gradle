@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'walle'
+//apply plugin: 'walle'
 //apply plugin: 'org.greenrobot.greendao'
 
 ////自定义Greendao版本和生成路径
@@ -17,11 +17,11 @@ apply plugin: 'walle'
 //}
 
 android {
+
     compileSdkVersion 28
     defaultConfig {
-        manifestPlaceholders = [CUSTOM_CHANNEL_VALUE: "default"]
         applicationId "com.jetpack.xhb"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -53,29 +53,19 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
-    flavorDimensions "default"
-    productFlavors {
-        yingyongbao {
-            manifestPlaceholders = [CUSTOM_CHANNEL_VALUE: "yingyongbao"]
-        }
-        baidu {
-            manifestPlaceholders = [CUSTOM_CHANNEL_VALUE: "baidu"]
-        }
-    }
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
         }
     }
-    walle {
-        // 指定渠道包的输出路径
-        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-        // 定制渠道包的APK的文件名称
-        apkFileNameFormat = '${appName}-${buildType}-${flavorName}-${channel}-v${versionName}.apk';
-        // 渠道配置文件
-        channelFile = new File("${project.getProjectDir()}/channel")
-    }
+//    walle {
+//        // 指定渠道包的输出路径
+//        apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+//        // 定制渠道包的APK的文件名称
+//        apkFileNameFormat = '${appName}-${buildType}-${flavorName}-${channel}-v${versionName}.apk';
+//        // 渠道配置文件
+//        channelFile = new File("${project.getProjectDir()}/channel")
+//    }
 }
 
 dependencies {
@@ -100,11 +90,19 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.0.2'
 
-    implementation 'com.meituan.android.walle:library:1.1.6'
-}
-
-task assembleReleaseChannelssss {
-    doFirst {
-        tasks.assembleBaiduReleaseChannels.execute()
+    // 底部菜单
+    implementation('com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar') {
+        exclude group: 'com.android.support', module: 'support-v4'
     }
+    //smartRefreshLayout 下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+    //Banner
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+    // 视屏播放器
+    implementation ('com.shuyu:GSYVideoPlayer:2.1.1') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    implementation 'com.meituan.android.walle:library:1.1.6'
 }
